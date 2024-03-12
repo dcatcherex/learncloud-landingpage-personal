@@ -3,8 +3,6 @@ import type { Metadata } from 'next'
 // import { Inter } from 'next/font/google'
 import { Prompt } from 'next/font/google'
 
-import { SessionProvider } from 'next-auth/react'
-
 import { ThemeProvider } from '@/components/theme-provider'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 
