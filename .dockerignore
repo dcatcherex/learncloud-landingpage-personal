@@ -2,9 +2,7 @@
 # container here (e.g., local build artifacts, temporary files, etc.).
 #
 # For more help, visit the .dockerignore file reference guide at
-# https://docs.docker.com/engine/reference/builder/#dockerignore-file
-
-# ref: https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/docker/docker-ignore.md
+# https://docs.docker.com/go/build-context-dockerignore/
 
 **/.classpath
 **/.dockerignore
@@ -31,7 +29,6 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 **/build
-**/.next
-
+**/dist
 LICENSE
 README.md
