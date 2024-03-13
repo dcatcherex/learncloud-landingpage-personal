@@ -1,5 +1,4 @@
 # ref: https://github.com/vercel/next.js/blob/canary/examples/with-docker-compose/next-app/prod.Dockerfile
-# FROM node:20.10.0-alpine AS base
 
 # Step 1. Rebuild the source code only when needed
 FROM node:20.10.0-alpine as builder
