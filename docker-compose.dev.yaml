@@ -1,0 +1,29 @@
+# ref: https://github.com/vercel/next.js/blob/canary/examples/with-docker-compose/docker-compose.dev.yml
+
+version: "3.8"
+
+name: ai-learn-landing-page
+services:
+    next-app:
+        container_name: landing-page-dev
+        build:
+            context: .
+            dockerfile: "docker/development/Dockerfile"
+
+        # TODO: Set the environment variables in the .env file
+        # Set environment variables directly in the docker-compose file
+        # environment:
+            # ENV_VARIABLE: ${ENV_VARIABLE}
+            # NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+
+        # Set environment variables based on the .env file
+        # env_file:
+            # - .env
+
+        volumes:
+            - ./app:/app/src
+            - ./public:/app/public
+
+        restart: always
+        ports:
+            - 3000:3000

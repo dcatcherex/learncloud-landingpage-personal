@@ -1,31 +1,38 @@
-# ref: https://pnpm.io/docker
+# ref: https://github.com/vercel/next.js/blob/canary/examples/with-docker-compose/next-app/dev.Dockerfile
 
-FROM node:20.10.0-alpine as base
+# Step 1. Rebuild the source code only when needed
+FROM node:20.10.0 as builder
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-
-# enable corepack to install package dependencies
-RUN corepack enable
-
-COPY . /app
+# Set the working directory in the container
 WORKDIR /app
 
-# It installs only the production dependencies using pnpm install --prod --frozen-lockfile.
-FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+# Install dependencies based on the preferred package manager
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
-# It installs all dependencies (both production and development)
-FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run build
+RUN \
+    if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install; \
+    # Allow install without lockfile, so example works even without Node.js installed locally
+    else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && yarn install; \
+    fi
 
-# It copies the node_modules directory from the prod-deps stage, ensuring that only the production dependencies are included in the final image.
-# It copies the built application files from the build stage to the /app/dist directory
-FROM base
-COPY --from=prod-deps /app/node_modules /app/node_modules
-COPY --from=build /app/.next /app/.next
+# if we have app folder under the src folder
+# COPY app ./app public ./public next.config.mjs tsconfig.json ./
 
-EXPOSE 3000
+# but we don't have src folder
+COPY . .
 
-CMD [ "pnpm", "start" ]
+# Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line to disable telemetry at run time
+# ENV NEXT_TELEMETRY_DISABLED 1
+
+# Note: Don't expose ports here, Compose will handle that for us
+
+# Start Next.js in development mode based on the preferred package manager
+CMD \
+    if [ -f yarn.lock ]; then yarn dev; \
+    elif [ -f package-lock.json ]; then npm run dev; \
+    elif [ -f pnpm-lock.yaml ]; then pnpm dev; \
+    else npm run dev; \
+    fi
