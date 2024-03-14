@@ -6,6 +6,7 @@ name: ai-learn-landing-page
 services:
     next-app:
         container_name: landing-page-dev
+        image: ai-learn-landing-page-dev
         build:
             context: .
             dockerfile: "docker/development/Dockerfile"
