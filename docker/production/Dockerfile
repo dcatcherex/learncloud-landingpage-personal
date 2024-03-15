@@ -70,7 +70,7 @@ ARG NEXT_PUBLIC_ENV_VARIABLE
 ENV NEXT_PUBLIC_ENV_VARIABLE=${NEXT_PUBLIC_ENV_VARIABLE}
 
 # Note: Don't expose ports here, Compose will handle that for us
-# EXPOSE 3000
+EXPOSE 3000
 
 CMD ["node", "server.js"]
 # CMD ["tail", "-f", "/dev/null"]
