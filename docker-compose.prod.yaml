@@ -2,10 +2,10 @@
 
 version: "3.8"
 
-name: ai-learn-landing-page
+name: ai-learn-landing-page-prod
 services:
     next-app:
-        container_name: landing-page-prod
+        container_name: landing-page
         image: ai-learn-landing-page-prod
         build:
             context: .
