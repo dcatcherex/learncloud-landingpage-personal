@@ -4,10 +4,10 @@
 name: AI-Learn landing page Next.js CI/CD (Main-AWS-ECR)
 
 on:
-  push:
-    branches: main
-  pull_request:
-    branches: main
+  # push:
+  #   branches: main
+  # pull_request:
+  #   branches: main
 
   workflow_dispatch:
     inputs:
