@@ -17,67 +17,67 @@ on:
       #   required: true
       #   default: 471112879285
 
-      aws_region:
-        description: AWS Region
-        default: ap-southeast-1
-        required: true
+      # aws_region:
+      #   description: AWS Region
+      #   default: ap-southeast-1
+      #   required: true
 
-      aws_role_arn:
-        description: GitHub OIDC AWS Role ARN
-        default: arn:aws:iam::471112879285:role/github-actions-ailearn-landingpage
-        required: true
+      # aws_role_arn:
+      #   description: GitHub OIDC AWS Role ARN
+      #   default: arn:aws:iam::471112879285:role/github-actions-ailearn-landingpage
+      #   required: true
 
-      aws_ecr_repository:
-        description: ECR Repository
-        default: ai-learn-nextjs-landing-page
-        required: true
+      # aws_ecr_repository:
+      #   description: ECR Repository
+      #   default: ai-learn-nextjs-landing-page
+      #   required: true
 
       # <<<<<<<<<< AWS Account
 
       # <<<<<<<<<< AWS ECS
 
-      aws_ecs_cluster:
-        description: ECS Cluster Name
-        default: ai-learn-fargate-cluster
-        required: true
+      # aws_ecs_cluster:
+      #   description: ECS Cluster Name
+      #   default: ai-learn-fargate-cluster
+      #   required: true
 
-      aws_ecs_services:
-        description: ECS Service Name
-        default: ai-learn-landing-page
-        required: true
+      # aws_ecs_services:
+      #   description: ECS Service Name
+      #   default: ai-learn-landing-page
+      #   required: true
 
-      aws_ecs_task_definitions:
-        description: ECS Task Definiation Name
-        default: ai-learn-nextjs-landing-page
-        required: true
+      # aws_ecs_task_definitions:
+      #   description: ECS Task Definiation Name
+      #   default: ai-learn-nextjs-landing-page
+      #   required: true
 
-      aws_ecs_task_definitions_container_name:
-        description: ECS Task Definiation Container Name
-        default: ai-learn-nextjs-landing-page-container
-        required: true
+      # aws_ecs_task_definitions_container_name:
+      #   description: ECS Task Definiation Container Name
+      #   default: ai-learn-nextjs-landing-page-container
+      #   required: true
 
       # <<<<<<<<<< AWS ECS
 
       # >>>>>>>>>> Docker
 
-      path_to_dockerfile:
-        description: Path to the dockerfile (default = 'Dockerfile')
-        # default: "e2e-test/artifact.dockerfile"
-        default: "docker/prod/Dockerfile"
-        type: string
+      # path_to_dockerfile:
+      #   description: Path to the dockerfile (default = 'Dockerfile')
+      #   # default: "e2e-test/artifact.dockerfile"
+      #   default: "docker/prod/Dockerfile"
+      #   type: string
 
-      docker_build_dir:
-        description: Docker build directory (default = '.')
-        default: "e2e-test"
-        type: string
-        required: true
+      # docker_build_dir:
+      #   description: Docker build directory (default = '.')
+      #   default: "e2e-test"
+      #   type: string
+      #   required: true
 
-      image_tag:
-        description: latest
-        type: string
-        # default: snapshot-artifact
-        default: docker
-        required: true
+      # image_tag:
+      #   description: latest
+      #   type: string
+      #   # default: snapshot-artifact
+      #   default: docker
+      #   required: true
 
       # <<<<<<<<<< Docker
 
