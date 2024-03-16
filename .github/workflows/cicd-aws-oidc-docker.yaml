@@ -4,8 +4,8 @@
 name: AI-Learn landing page Next.js CI/CD (Main-AWS-ECR)
 
 on:
-  # push:
-  #   branches: docker
+  push:
+    branches: docker
   # pull_request:
   #   branches: docker
 
