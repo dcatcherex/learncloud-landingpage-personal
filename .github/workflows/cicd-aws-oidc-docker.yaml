@@ -145,7 +145,7 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: |
-            ${{ ECR_REGISTRY }/${{ github.event.inputs.aws_ecr_repository }}:${{ IMAGE_TAG }}
+            ${{ ECR_REGISTRY }}/${{ github.event.inputs.aws_ecr_repository }}:${{ IMAGE_TAG }}
             ${{ ECR_REGISTRY }}/${{ ECR_REPOSITORY }}:${{ github.event.inputs.image_tag }} >> $GITHUB_OUTPUT
           labels: docker
 
