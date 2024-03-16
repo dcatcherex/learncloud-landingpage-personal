@@ -19,18 +19,18 @@ on:
 
       aws_region:
         description: AWS Region
-        required: true
         default: ap-southeast-1
+        required: true
 
       aws_role_arn:
         description: GitHub OIDC AWS Role ARN
-        required: true
         default: arn:aws:iam::471112879285:role/github-actions-ailearn-landingpage
+        required: true
 
       aws_ecr_repository:
         description: ECR Repository
-        required: true
         default: ai-learn-nextjs-landing-page
+        required: true
 
       # <<<<<<<<<< AWS Account
 
@@ -38,23 +38,23 @@ on:
 
       aws_ecs_cluster:
         description: ECS Cluster Name
-        required: true
         default: ai-learn-fargate-cluster
+        required: true
 
       aws_ecs_services:
         description: ECS Service Name
-        required: true
         default: ai-learn-landing-page
+        required: true
 
       aws_ecs_task_definitions:
         description: ECS Task Definiation Name
-        required: true
         default: ai-learn-nextjs-landing-page
+        required: true
 
       aws_ecs_task_definitions_container_name:
         description: ECS Task Definiation Container Name
-        required: true
         default: ai-learn-nextjs-landing-page-container
+        required: true
 
       # <<<<<<<<<< AWS ECS
 
@@ -70,14 +70,21 @@ on:
         description: Docker build directory (default = '.')
         default: "e2e-test"
         type: string
+        required: true
 
       image_tag:
         description: latest
         type: string
         # default: snapshot-artifact
         default: docker
+        required: true
 
       # <<<<<<<<<< Docker
+
+      name:
+        description: 'Person to greet'
+        default: 'Mona the Octocat'
+        required: true
 
 env:
   # AWS_ACCOUNT_ID: "782750715248"
@@ -93,83 +100,90 @@ env:
   # CONTAINER_NAME: demo-express-nodejs # set this to the name of the container in the, containerDefinitions section of your task definition
 
 jobs:
-  build:
-    name: Build Next.js and Push to AWS ECS
+  greeting:
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write
-      contents: read
-
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     steps:
-      - name: Checkout repository
-        id: checkout
-        uses: actions/checkout@v4
+      - name: Greeting
+        run: echo "Hello, ${{ github.event.inputs.name }}"
 
-      - name: Configure AWS Credentials
-        id: configure-aws-credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          # role-to-assume: arn:aws:iam::${{ github.event.inputs.aws_account_id }}:role/github-actions-${{ github.event.repository.name }}
-          # role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github-actions-${{ github.event.repository.name }}
-          # role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          role-to-assume: ${{ github.event.inputs.aws_role_arn }}
-          # role-session-name: ${{ env.AWS_ROLE_SESSION_NAME }} # Defaults to "GitHubActions", but may be changed if required.
-          # aws-region: ${{ env.AWS_REGION }}
-          aws-region: ${{ github.event.inputs.aws_region }}
+# jobs:
+#   build:
+#     name: Build Next.js and Push to AWS ECS
+#     runs-on: ubuntu-latest
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+#     permissions:
+#       id-token: write
+#       contents: read
 
-      - name: Set up QEMU
-        id: setup-qemu
-        uses: docker/setup-qemu-action@v3
+#     strategy:
+#       matrix:
+#         node-version: [20.x]
 
-      - name: Set up Docker Buildx
-        id: setup-docker-buildx
-        uses: docker/setup-buildx-action@v3
+#     steps:
+#       - name: Checkout repository
+#         id: checkout
+#         uses: actions/checkout@v4
 
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
-        uses: docker/build-push-action@v5
-        with:
-          context: docker/development/Dockerfile
-          platforms: linux/amd64, linux/arm64
-          push: true
-          tags: |
-            ${{ steps.login-ecr.outputs.registry }}/${{ github.event.inputs.aws_ecr_repository }}:${{ github.sha }}
-            ${{ steps.login-ecr.outputs.registry }}/${{ github.event.inputs.aws_ecr_repository }}:${{ github.event.inputs.image_tag }} >> $GITHUB_OUTPUT
-          labels: docker
+#       - name: Configure AWS Credentials
+#         id: configure-aws-credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           # role-to-assume: arn:aws:iam::${{ github.event.inputs.aws_account_id }}:role/github-actions-${{ github.event.repository.name }}
+#           # role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github-actions-${{ github.event.repository.name }}
+#           # role-to-assume: ${{ env.AWS_ROLE_ARN }}
+#           role-to-assume: ${{ github.event.inputs.aws_role_arn }}
+#           # role-session-name: ${{ env.AWS_ROLE_SESSION_NAME }} # Defaults to "GitHubActions", but may be changed if required.
+#           # aws-region: ${{ env.AWS_REGION }}
+#           aws-region: ${{ github.event.inputs.aws_region }}
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
-          # container-name: ${{ env.CONTAINER_NAME }}
-          container-name: ${{ github.event.inputs.aws_ecs_task_definitions_container_name }}
-          image: ${{ steps.build-image.outputs.image }}
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Download task definition
-        id: download-task-def
-        run: |
-          aws ecs describe-task-definition --task-definition ${{ github.event.inputs.aws_ecs_task_definitions }} --query taskDefinition  > task-definition.json
+#       - name: Set up QEMU
+#         id: setup-qemu
+#         uses: docker/setup-qemu-action@v3
 
-      - name: Deploy Amazon ECS task definition
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          # task-definition: ${{ steps.task-def.outputs.task-definition }}
-          task-definition: task-definition.json
-          # service: ${{ env.ECS_SERVICE }}
-          # cluster: ${{ env.ECS_CLUSTER }}
-          service: ${{ github.event.inputs.ECS_SERVICE }}
-          cluster: ${{ github.event.inputs.ECS_CLUSTER }}
-          wait-for-service-stability: true
+#       - name: Set up Docker Buildx
+#         id: setup-docker-buildx
+#         uses: docker/setup-buildx-action@v3
+
+#       - name: Build, tag, and push image to Amazon ECR
+#         id: build-image
+#         env:
+#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#           IMAGE_TAG: ${{ github.sha }}
+#         uses: docker/build-push-action@v5
+#         with:
+#           context: docker/development/Dockerfile
+#           platforms: linux/amd64, linux/arm64
+#           push: true
+#           tags: |
+#             ${{ steps.login-ecr.outputs.registry }}/${{ github.event.inputs.aws_ecr_repository }}:${{ github.sha }}
+#             ${{ steps.login-ecr.outputs.registry }}/${{ github.event.inputs.aws_ecr_repository }}:${{ github.event.inputs.image_tag }} >> $GITHUB_OUTPUT
+#           labels: docker
+
+#       - name: Fill in the new image ID in the Amazon ECS task definition
+#         id: task-def
+#         uses: aws-actions/amazon-ecs-render-task-definition@v1
+#         with:
+#           task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
+#           # container-name: ${{ env.CONTAINER_NAME }}
+#           container-name: ${{ github.event.inputs.aws_ecs_task_definitions_container_name }}
+#           image: ${{ steps.build-image.outputs.image }}
+
+#       - name: Download task definition
+#         id: download-task-def
+#         run: |
+#           aws ecs describe-task-definition --task-definition ${{ github.event.inputs.aws_ecs_task_definitions }} --query taskDefinition  > task-definition.json
+
+#       - name: Deploy Amazon ECS task definition
+#         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+#         with:
+#           # task-definition: ${{ steps.task-def.outputs.task-definition }}
+#           task-definition: task-definition.json
+#           # service: ${{ env.ECS_SERVICE }}
+#           # cluster: ${{ env.ECS_CLUSTER }}
+#           service: ${{ github.event.inputs.ECS_SERVICE }}
+#           cluster: ${{ github.event.inputs.ECS_CLUSTER }}
+#           wait-for-service-stability: true
