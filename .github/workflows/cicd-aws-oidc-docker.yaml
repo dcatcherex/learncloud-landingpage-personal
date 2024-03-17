@@ -28,7 +28,7 @@ env:
   ECS_SERVICE: "ai-learn-landing-page"
   ECS_TASK_DEFINITION_FILE: .aws/task-definition.json
   ECS_TASK_DEFINITION: "ai-learn-nextjs-landing-page"
-  CONTAINER_NAME: "ai-learn-nextjs-landing-page-container"
+  CONTAINER_NAME: "nextjs-landing-page"
   IMAGE_TAG: "latest"
 
 jobs:
