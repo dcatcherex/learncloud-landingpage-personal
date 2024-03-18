@@ -10,18 +10,17 @@ on:
       - 'LICENSE'
       - 'README.md'
       - 'docs/**'
-      - '.github/**'
       - '.gitignore'
       - '.gitattributes'
       - '.editorconfig'
       - '.eslintrc.js'
       - '.prettierrc.js'
       - '.vscode/**'
-      - 'aws/**'
-      - 'terraform/**'
-      - 'helm/**'
-      - 'k8s/**'
-      - 'ansible/**'
+      # - 'aws/**'
+      # - 'terraform/**'
+      # - 'helm/**'
+      # - 'k8s/**'
+      # - 'ansible/**'
 
 defaults:
   run:
