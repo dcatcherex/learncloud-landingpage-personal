@@ -6,23 +6,22 @@ name: CI/CD AI-Learn landing page (AWS-ECR)
 on:
   push:
     branches: docker
-    
-  paths-ignore:
-    - 'LICENSE'
-    - 'README.md'
-    - 'docs/**'
-    - '.github/**'
-    - '.gitignore'
-    - '.gitattributes'
-    - '.editorconfig'
-    - '.eslintrc.js'
-    - '.prettierrc.js'
-    - '.vscode/**'
-    - 'aws/**'
-    - 'terraform/**'
-    - 'helm/**'
-    - 'k8s/**'
-    - 'ansible/**'
+    paths-ignore:
+      - 'LICENSE'
+      - 'README.md'
+      - 'docs/**'
+      - '.github/**'
+      - '.gitignore'
+      - '.gitattributes'
+      - '.editorconfig'
+      - '.eslintrc.js'
+      - '.prettierrc.js'
+      - '.vscode/**'
+      - 'aws/**'
+      - 'terraform/**'
+      - 'helm/**'
+      - 'k8s/**'
+      - 'ansible/**'
 
 defaults:
   run:
