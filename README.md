@@ -37,18 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Docker
 
-Build on root folder (specific path to docker file)
-
-### Command
-
-### Build Docker image
-
-```
-docker build -t ai-learn-landing -f .\docker\{env-folder}\Dockerfile .
-```
-
-### Run Docker from image
-
-```
-docker run -tid --name ai-learn-landing -p 80:3000 ai-learn-landing
-```
+[README.Docker.md](doc/README.Docker.md)
