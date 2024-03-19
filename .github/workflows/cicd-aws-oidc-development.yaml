@@ -5,7 +5,8 @@ name: (Main) CI/CD AI-Learn landing page (AWS-ECR)
 
 on:
   push:
-    branches: development
+    branches: 
+      - development
     paths-ignore:
       - 'LICENSE'
       - 'README.md'
