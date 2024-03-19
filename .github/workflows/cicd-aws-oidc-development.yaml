@@ -50,6 +50,8 @@ jobs:
   build:
     name: Build Next.js and Push to AWS ECR
     runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.build-image.outputs.image }}
     strategy:
       matrix:
         node-version: [20.x]
