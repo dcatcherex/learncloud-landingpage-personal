@@ -120,7 +120,7 @@ jobs:
         task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
         container-name: ${{ env.CONTAINER_NAME }}
         # image: ${{env.ECR_REGISTRY}}/${{env.ECR_REPOSITORY}}:${{env.IMAGE_TAG}}
-        image: ${{ needs.build.outputs.output1 }}
+        image: ${{ needs.build.outputs.image }}
 
     - name: Download task definition
       id: download-task-def
