@@ -118,14 +118,20 @@ jobs:
       - name: Checkout repository
         id: checkout
         uses: actions/checkout@v4
-        
+
+      - name: Configure AWS Credentials
+        id: configure-aws-credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1.2.0
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
           container-name: ${{ env.CONTAINER_NAME }}
-          # image: ${{env.ECR_REGISTRY}}/${{env.ECR_REPOSITORY}}:${{env.IMAGE_TAG}}
           image: ${{ needs.build.outputs.image }}
 
       - name: Download task definition
