@@ -9,6 +9,7 @@ on:
     paths-ignore:
       - 'LICENSE'
       - 'README.md'
+      - '**/*.md'
       - 'docs/**'
       - '.gitignore'
       - '.gitattributes'
