@@ -9,16 +9,16 @@ export const siteConfig = {
       href: "/",
     },
     {
-      title: "Practice & Exam",
-      href: "/exam",
+      title: "Product",
+      href: "/",
     },
     {
-      title: "Blog & Articles",
-      href: "/blog",
+      title: "About Us",
+      href: "/",
     },
     {
-      title: "About us",
-      href: "/aboutus",
+      title: "More",
+      href: "/",
     },
   ],
 };

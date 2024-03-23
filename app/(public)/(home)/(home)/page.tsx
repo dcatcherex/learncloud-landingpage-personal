@@ -1,11 +1,8 @@
 'use client'
 
-import SectionModernFeatures from "@/components/home/section-modern-features"
-import SectionModernFooter from "@/components/home/section-modern-footer"
-import SectionModernHero from "@/components/home/section-modern-hero"
-import SectionModernMobile from "@/components/home/section-modern-mobile"
-import SectionModernPrices from "@/components/home/section-modern-prices"
-import SectionModernTestimonials from "@/components/home/section-modern-testimonials"
+import SectionModernFooter from "@/components/home/section-footer"
+import SectionModernHero from "@/components/home/section-hero"
+import SectionModernMobile from "@/components/home/section-mobile"
 import { Button } from "@/components/ui/button"
 
 
@@ -23,12 +20,9 @@ const HomePage = () => {
       <div className='h-full'>
         <SectionModernHero />
         <SectionModernMobile />
-        <SectionModernFeatures />
-        <SectionModernTestimonials />
-        <SectionModernPrices />
         <SectionModernFooter />
 
-    </div>
+      </div>
     </main>
 
   )

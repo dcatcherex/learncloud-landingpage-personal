@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 // import { Inter } from 'next/font/google'
 import { Prompt } from 'next/font/google'
+import { IBM_Plex_Sans_Thai } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
@@ -12,6 +13,14 @@ const prompt = Prompt({
   weight: ['200','300','400','500','600','700'],
   subsets: ['latin'],
   display: 'swap',})
+
+// ibm plex thai
+
+const ibm = IBM_Plex_Sans_Thai({
+  weight: ['200','300','400','500','600','700'],
+  subsets: ['thai'],
+  display: 'swap',})
+
 
 export const metadata: Metadata = {
   title: 'AI Learn',
@@ -27,7 +36,7 @@ export default async function RootLayout({
 
   return (
       <html lang="en">
-        <body className={`${prompt.className}`}>
+        <body className={`${ibm.className}`}>
           <ThemeProvider 
             attribute='class' 
             defaultTheme='light'

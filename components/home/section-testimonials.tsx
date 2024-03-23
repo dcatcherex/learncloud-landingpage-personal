@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const SectionModernTestimonials = () => {
+const SectionTestimonials = () => {
   return (
     <section className="relative overflow-hidden py-24 lg:pb-20 lg:pt-32 dark:bg-slate-900">
       <Image
@@ -741,4 +741,4 @@ const SectionModernTestimonials = () => {
     </section>
   );
 };
-export default SectionModernTestimonials;
+export default SectionTestimonials;

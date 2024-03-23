@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const SectionModernFeatures = () => {
+const SectionFeatures = () => {
   return (
     <section className="relative overflow-hidden py-20 bg-white dark:bg-slate-900
     ">
@@ -159,4 +159,4 @@ const SectionModernFeatures = () => {
     </section>
   );
 };
-export default SectionModernFeatures;
+export default SectionFeatures;
