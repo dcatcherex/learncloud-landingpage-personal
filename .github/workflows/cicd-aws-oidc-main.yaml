@@ -43,7 +43,7 @@ env:
   AWS_ROLE_SESSION_NAME: "github-action-landing-page-fargate-deployment"
 
   ECR_REPOSITORY: "ai-learn-nextjs-landing-page"
-  ECS_CLUSTER: "ai-learn-fargate-cluster"
+  ECS_CLUSTER: "dev-fargate-cluster"
   ECS_SERVICE: "ai-learn-landing-page"
   ECS_TASK_DEFINITION_FILE: .aws/task-definition.json
   ECS_TASK_DEFINITION: "ai-learn-nextjs-landing-page"
