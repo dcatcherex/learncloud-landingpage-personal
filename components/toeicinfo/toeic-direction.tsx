@@ -5,7 +5,7 @@ const ToeicDirection = () => {
             <h3 className="mb-4 text-primary">
                 วิธีเดินทางไปศูนย์สอบ
             </h3>
-            <div className="h-[500px] overflow-y-auto">
+            <div className="h-[460px] overflow-y-auto">
                 <div className="mb-8">
                     <p><span className="font-semibold">ศูนย์สอบกรุงเทพฯ:</span> อาคาร BB Building เลขที่ 54 ชั้น 19 ห้อง 1907 ถนนอโศกมนตรี ซอยสุขุมวิท 21 แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110</p>
 

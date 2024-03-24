@@ -1,9 +1,11 @@
 const ToeicPrepare = () => {
     return (
-        <section><h3 className="mb-4 text-primary">
+        <section>
+                        <h2>TOEIC Info</h2>
+<h3 className="mb-4 text-primary">
             การเตรียมตัวสอบ
         </h3>
-            <div className="h-[500px] overflow-y-auto">
+            <div className="h-[460px] overflow-y-auto">
                 <div className="mb-8">
                     <p>ผู้สนใจสอบ สามารถศึกษาข้อมูลเพื่อ เตรียมตัวสอบ และศึกษาข้อมูลสำคัญเกี่ยวกับแบบทดสอบ TOEIC® Listening & Reading Test (Institutional Test) ได้จาก</p>
 

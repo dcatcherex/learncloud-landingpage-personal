@@ -1,9 +1,11 @@
 const ToeicSchedule = () => {
   return (
-    <section><h3 className="mb-4 text-primary">
+    <section>
+                  <h2>TOEIC Info</h2>
+<h3 className="mb-4 text-primary">
     ตารางสอบ Toeic
   </h3>
-  <div className="h-[500px] overflow-y-auto">
+  <div className="h-[460px] overflow-y-auto">
     <div className="mb-4">
       <div className="mb-2 font-semibold">ศูนย์สอบ: กรุงเทพฯ, เชียงใหม่</div>
       <p>

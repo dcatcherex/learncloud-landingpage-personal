@@ -25,8 +25,11 @@ const components = [
 ];
 
 const SectionHero = () => {
+  const [activeComponent, setActiveComponent] = useState(0);
+
   return (
-    <section className=" bg-white pt-20 dark:bg-slate-900">
+    <section className=" bg-[#4096FF] pt-20 dark:bg-slate-900">
+
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-md lg:max-w-7xl">
           <div className=" -mx-4 mb-14 flex flex-wrap items-center">
@@ -35,12 +38,12 @@ const SectionHero = () => {
                 <span className="mb-5 inline-block rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-900 dark:text-slate-900 dark:bg-white">
                   👋 Coming Soon!!!
                 </span>
-                <h1 className="xs:text-6xl text-5xl font-medium xl:text-7xl text-slate-700 dark:text-white ">
+                <h1 className="xs:text-6xl text-5xl font-medium xl:text-7xl text-blue-800 dark:text-white ">
                   <span>ฝึกฝน เรียนรู้ โทอิค</span>
-                  <span className="block text-primary leading-snug ">
-                    ด้วยระบบวิเคราะห์<p>ผู้ใช้รายบุคคล</p>
+                  <span className="block text-white leading-snug dark:text-secondary ">
+                    ด้วยระบบวิเคราะห์<p>ผู้เรียนรายบุคคล</p>
                   </span>
-                  <span>กับ ไอเลิร์น</span>
+                  <span>กับ aiLearn<span className='text-2xl font-normal'>(ไอเลิร์น)</span></span>
                 </h1>
               </div>
             </div>
@@ -56,7 +59,7 @@ const SectionHero = () => {
                   </div>
                   <Button
                     size={"lg"}
-                    className="rounded-full  bg-primary  text-center font-semibold text-orange-50"
+                    className="rounded-full  bg-secondary  text-center font-semibold text-orange-50"
 
                   >
                     Coming soon!
@@ -65,6 +68,7 @@ const SectionHero = () => {
               </div>
             </div>
           </div>
+
           <div className="relative mx-auto max-w-2xl xl:max-w-4xl">
             <Image
               className="absolute left-0 top-1/2 -ml-40 -translate-y-1/2 lg:-ml-72 dark:opacity-30 dark:top-0"
@@ -80,13 +84,41 @@ const SectionHero = () => {
               height={791}
               alt=""
             />
-            <Image
-              className="relative block w-full"
-              src="/home/applications/ipad.png"
-              width={882}
-              height={526}
-              alt=""
-            />
+            
+            
+            {/* display Toeic Info */}
+            <div
+              className="relative block px-12 pt-20 h-[712px] "
+              style={{
+                backgroundImage: `url(/home/applications/ipad.png)`,
+                backgroundSize: 'cover',
+                // padding: '50px'
+              }}>
+
+              {/* pseudo-element */}
+              
+              {/* <ToeicSchedule />
+                <ToeicReserve />
+                <ToeicReportto />
+                <ToeicProve />
+                <ToeicExpense />
+                <ToeicGetresult />
+                <ToeicPrepare />
+                <ToeicDirection /> */}
+              {components[activeComponent].component}
+
+              <div className="flex justify-center space-x-2 mt-4">
+                {components.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-4 h-4 rounded-full focus:outline-none ${index === activeComponent ? 'bg-blue-500' : 'bg-slate-100'}`}
+                    onClick={() => setActiveComponent(index)}
+                  />
+                ))}
+              </div>
+
+            </div>
+
             <div className="flex justify-center gap-10 mt-16">
               <Image
                 src={"/logo/partner/sharktank.svg"}
@@ -125,27 +157,12 @@ const SectionHero = () => {
                 alt=""
               />
             </div>
-            <div
-              className="px-12 pt-20 h-[712px] "
-              style={{
-                backgroundImage: `url(/home/applications/ipad.png)`,
-                backgroundSize: 'cover',
-                // padding: '50px'
-              }}>
-                <ToeicSchedule />
-                <ToeicReserve />
-                <ToeicReportto />
-                <ToeicProve />
-                <ToeicExpense />
-                <ToeicGetresult />
-                <ToeicPrepare />
-                <ToeicDirection />
-              
-            </div>
+
 
           </div>
         </div>
       </div>
+
     </section>
   );
 };
