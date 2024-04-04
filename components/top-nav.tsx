@@ -30,7 +30,7 @@ const TopNav = ({ hasLogoText = false }: TopNavProps) => {
   return (
     <header className="">
       <nav
-        className="fixed mx-auto  flex w-full bg-white dark:bg-slate-800 p-2 lg:px-8"
+        className="fixed mx-auto z-40  flex w-full bg-white dark:bg-slate-800 p-2 lg:px-8"
         aria-label="Global"
       >
         <div className="container flex items-center justify-between px-0 xl:px-8">
