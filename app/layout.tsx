@@ -45,7 +45,7 @@ export default async function RootLayout({
             >
           {children}
           </ThemeProvider>
-          <TailwindIndicator />
+          {/* <TailwindIndicator /> */}
         </body>
       </html>
   )
