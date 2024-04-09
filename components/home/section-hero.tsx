@@ -78,6 +78,7 @@ const SectionHero = () => {
               height={300}
               alt=""
             />
+            
             <Image
               className="dark:bg-white shadow-outter rounded-2xl mb-8"
               src={"/home/landing/Overall.png"}
