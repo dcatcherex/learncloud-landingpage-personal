@@ -1,25 +1,31 @@
 import React from 'react'
 import type { Metadata } from 'next'
-// import { Inter } from 'next/font/google'
+
+import { GoogleTagManager } from '@next/third-parties/google'
+
 import { Prompt } from 'next/font/google'
 import { IBM_Plex_Sans_Thai } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 
+
+
 import './globals.css'
 // const inter = Inter({ subsets: ['latin'] })
 const prompt = Prompt({
-  weight: ['200','300','400','500','600','700'],
+  weight: ['200', '300', '400', '500', '600', '700'],
   subsets: ['latin'],
-  display: 'swap',})
+  display: 'swap',
+})
 
 // ibm plex thai
 
 const ibm = IBM_Plex_Sans_Thai({
-  weight: ['200','300','400','500','600','700'],
+  weight: ['200', '300', '400', '500', '600', '700'],
   subsets: ['thai'],
-  display: 'swap',})
+  display: 'swap',
+})
 
 
 export const metadata: Metadata = {
@@ -32,21 +38,22 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  
+
 
   return (
-      <html lang="en">
-        <body className={`${ibm.className}`}>
-          <ThemeProvider 
-            attribute='class' 
-            defaultTheme='light'
-            enableSystem
-            disableTransitionOnChange
-            >
+    <html lang="en">
+      <GoogleTagManager gtmId="GTM-KRFVKRR6" />
+      <body className={`${ibm.className}`}>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='light'
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
-          </ThemeProvider>
-          {/* <TailwindIndicator /> */}
-        </body>
-      </html>
+        </ThemeProvider>
+        {/* <TailwindIndicator /> */}
+      </body>
+    </html>
   )
 }
