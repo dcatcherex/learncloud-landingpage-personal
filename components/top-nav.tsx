@@ -28,7 +28,7 @@ const TopNav = ({ hasLogoText = false }: TopNavProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="">
+    <header>
       <nav
         className="fixed mx-auto z-40  flex w-full bg-white dark:bg-slate-800 p-2 lg:px-8"
         aria-label="Global"

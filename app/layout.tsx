@@ -1,9 +1,10 @@
 import React from 'react'
 import type { Metadata } from 'next'
 
+import TopNav from '@/components/top-nav'
+
 import { GoogleTagManager } from '@next/third-parties/google'
 
-import { Prompt } from 'next/font/google'
 import { IBM_Plex_Sans_Thai } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
@@ -12,12 +13,6 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 
 
 import './globals.css'
-// const inter = Inter({ subsets: ['latin'] })
-const prompt = Prompt({
-  weight: ['200', '300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 // ibm plex thai
 
@@ -50,6 +45,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <TopNav />
           {children}
         </ThemeProvider>
         {/* <TailwindIndicator /> */}

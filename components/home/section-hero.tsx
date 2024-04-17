@@ -41,7 +41,7 @@ const SectionHero = () => {
             <div className="font-semibold text-primary tracking-wide text-center md:text-left md:z-20  ">
               <p className='mb-4 text-3xl md:text-7xl z-30 '>เตรียมสอบ TOEIC กับ</p>
               <p className='relative mb-4 text-3xl md:text-7xl w-full md:max-w-4xl leading-relaxed'>
-                แอปพลิเคชั่น <span className='text-7xl md:text-9xl'>aiLearn</span>
+              แอปพลิเคชัน <span className='text-7xl md:text-9xl'>aiLearn</span>
                 <span className='absolute bottom-[54px] right-7 md:right-14 md:-top-2 text-lg md:text-3xl'>(ไอเลิร์น)</span>
               </p>
             </div>
@@ -197,7 +197,7 @@ const SectionHero = () => {
             <div className='flex justify-center text-right md:-ml-36'>
               <Button
                 size={"lg"}
-                className="w-[270px] md:w-[450px] mt-12 md:mt-28 rounded-full py-8 md:py-12  bg-[#FD0448] hover:bg-primary text-2xl md:text-4xl text-orange-50 "
+                className="w-[270px] md:w-[450px] mt-12 md:mt-28 rounded-full py-8 md:py-12  bg-[#FD0448] hover:bg-primary dark:hover:bg-red-700 text-2xl md:text-4xl text-orange-50 "
               >
                 <Link 
                 href={"/home/download/toeic-words.pdf"}
