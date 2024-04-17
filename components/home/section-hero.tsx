@@ -172,16 +172,7 @@ const SectionHero = () => {
                     alt=""
                   />
                 </Link>
-                <Link
-                  href={"https://www.linkedin.com/company/learncloudcoltd"}
-                >
-                  <Image
-                    src={"/logo/linkedin_logo.svg"}
-                    width={socialIconSize}
-                    height={socialIconSize}
-                    alt=""
-                  />
-                </Link>
+                
                 <Link
                   href={"https://www.tiktok.com/@learncloudofficial"}
                 >
