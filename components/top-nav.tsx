@@ -72,6 +72,9 @@ const TopNav = ({ hasLogoText = false }: TopNavProps) => {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <LanguageToggle />
             <ThemeToggle />
+              <Button 
+              variant={"ghost"}
+              className="rounded-full font-normal ">Sign Up</Button>
               <Button className="rounded-full font-normal">Login</Button>
           </div>
           {/* login */}
