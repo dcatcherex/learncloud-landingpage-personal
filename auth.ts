@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import Line from "next-auth/providers/line";
 
 export const {
   handlers: { GET, POST },
