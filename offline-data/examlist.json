@@ -1,0 +1,120 @@
+{
+    "data": [
+        {
+            "id": "169d2f2b-fb08-477e-9c2b-8a29bb072895",
+            "createdAt": "2024-04-02T02:30:48.787Z",
+            "updatedAt": "2024-04-02T02:30:48.787Z",
+            "name": "J003_1",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J003_1"
+        },
+        {
+            "id": "3f289956-3920-4d31-8885-63e07aa35dba",
+            "createdAt": "2024-04-02T02:30:49.609Z",
+            "updatedAt": "2024-04-02T02:30:49.609Z",
+            "name": "J004_2",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J004_2"
+        },
+        {
+            "id": "530570ea-994f-4e6c-93eb-b146f9e86f3f",
+            "createdAt": "2024-04-02T02:30:48.580Z",
+            "updatedAt": "2024-04-02T02:30:48.580Z",
+            "name": "J004_1",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J004_1"
+        },
+        {
+            "id": "bc3d8083-1c1e-417f-a242-d393e641b862",
+            "createdAt": "2024-04-02T02:30:48.354Z",
+            "updatedAt": "2024-04-02T02:30:48.354Z",
+            "name": "J001_2",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J001_2"
+        },
+        {
+            "id": "c1e36677-090a-448e-a8e2-258314482aa8",
+            "createdAt": "2024-04-02T02:30:48.998Z",
+            "updatedAt": "2024-04-02T02:30:48.998Z",
+            "name": "J003_2",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J003_2"
+        },
+        {
+            "id": "d63d0de9-07c0-4667-85b4-dfa345cacc42",
+            "createdAt": "2024-04-02T02:30:48.151Z",
+            "updatedAt": "2024-04-02T02:30:48.151Z",
+            "name": "J000",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J000"
+        },
+        {
+            "id": "d677e738-44ac-43eb-b965-68271a6cbcc9",
+            "createdAt": "2024-04-02T02:30:49.203Z",
+            "updatedAt": "2024-04-02T02:30:49.203Z",
+            "name": "J001_1",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J001_1"
+        },
+        {
+            "id": "e77892ae-1da0-4467-a198-270e3a92223d",
+            "createdAt": "2024-04-02T02:30:47.937Z",
+            "updatedAt": "2024-04-02T02:30:47.937Z",
+            "name": "J002_1",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J002_1"
+        },
+        {
+            "id": "fe0ddca5-911c-4e89-8657-0aacb4cdff03",
+            "createdAt": "2024-04-02T02:30:49.408Z",
+            "updatedAt": "2024-04-02T02:30:49.408Z",
+            "name": "J002_2",
+            "examType": null,
+            "language": null,
+            "year": null,
+            "examSet": null,
+            "categoryId": null,
+            "paper_id": "J002_2"
+        }
+    ],
+    "meta": {
+        "total": 9,
+        "lastPage": 1,
+        "currentPage": 1,
+        "perPage": 10,
+        "prev": null,
+        "next": null
+    }
+}
