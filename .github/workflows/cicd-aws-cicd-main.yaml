@@ -114,8 +114,8 @@ jobs:
             # run aws ecr login to aws ecr and process with iam role
             aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
 
-            sudo docker compose stop # stop the container
-            sudo docker compose rm -f # -f: This flag means to force the removal of containers. It will stop the containers if they are running and then remove them.
-            sudo docker compose pull # image name must be the same as repository
-            sudo docker compose -f docker-compose.dev.aws.yaml up -d # -d => detached mode
+            sudo docker-compose stop # stop the container
+            sudo docker-compose rm -f # -f: This flag means to force the removal of containers. It will stop the containers if they are running and then remove them.
+            sudo docker-compose pull # image name must be the same as repository
+            sudo docker-compose -f docker-compose.dev.aws.yaml up -d # -d => detached mode
             sudo docker image prune -af # -af: -a => all, -f => force, remove all images including unused and used images
