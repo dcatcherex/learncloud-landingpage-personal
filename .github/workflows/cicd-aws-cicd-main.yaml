@@ -1,27 +1,27 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: (Development) CI/CD AI-Learn landing page (AWS-ECR)
+name: Landing-Page-Main-CI/CD (EC2)
 
 on:
   pull_request:
     branches:
-      - main-aws-fargate
-    types: [ opened, synchronize, closed ]
-  push :
+      - main
+    types: [opened, synchronize, closed]
+  push:
     branches:
-      - main-aws-fargate
+      - main
     paths-ignore:
-      - 'LICENSE'
-      - 'README.md'
-      - '**/*.md'
-      - 'docs/**'
-      - '.gitignore'
-      - '.gitattributes'
-      - '.editorconfig'
-      - '.eslintrc.js'
-      - '.prettierrc.js'
-      - '.vscode/**'
+      - "LICENSE"
+      - "README.md"
+      - "**/*.md"
+      - "docs/**"
+      - ".gitignore"
+      - ".gitattributes"
+      - ".editorconfig"
+      - ".eslintrc.js"
+      - ".prettierrc.js"
+      - ".vscode/**"
       # - 'aws/**'
       # - 'terraform/**'
       # - 'helm/**'
@@ -40,20 +40,16 @@ env:
   AWS_ACCOUNT_ID: "471112879285"
   AWS_REGION: "ap-southeast-1"
   AWS_ROLE_ARN: "arn:aws:iam::471112879285:role/github-actions-ailearn-landingpage"
-  AWS_ROLE_SESSION_NAME: "github-action-landing-page-fargate-deployment"
+  AWS_ROLE_SESSION_NAME: "github-action-landing-page-ec2-deployment"
 
   ECR_REPOSITORY: "ai-learn-nextjs-landing-page"
-  ECS_CLUSTER: "dev-fargate-cluster"
-  ECS_SERVICE: "ai-learn-landing-page"
-  ECS_TASK_DEFINITION_FILE: .aws/task-definition.json
-  ECS_TASK_DEFINITION: "ai-learn-nextjs-landing-page"
-  CONTAINER_NAME: "nextjs-landing-page"
   IMAGE_TAG: "latest"
 
 jobs:
   build:
     name: Build Next.js and Push to AWS ECS
     runs-on: ubuntu-latest
+    environment: aws
     outputs:
       image: ${{ steps.build-image.outputs.image }}
     strategy:
@@ -85,6 +81,7 @@ jobs:
         id: setup-docker-buildx
         uses: docker/setup-buildx-action@v3
 
+      # Solution 1 : build with docker command
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
@@ -97,48 +94,29 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-  deploy:
-      name: Deploy to AWS ECS
-      runs-on: ubuntu-latest
-      needs: build
-      
-      steps:
-        - name: Checkout repository
-          id: checkout
-          uses: actions/checkout@v4
+  ssh-to-frontend-server-and-update-docker-container:
+    name: SSH to Frontend Server and Update Docker Container
+    runs-on: ubuntu-latest
+    environment: aws
+    needs: build
+    steps:
+      - name: SSH to Frontend server and update docker container
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # private key for ssh
+          passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSPHRASE }}
 
-        - name: Configure AWS Credentials
-          id: configure-aws-credentials
-          uses: aws-actions/configure-aws-credentials@v4
-          with:
-            role-to-assume: ${{ env.AWS_ROLE_ARN }}
-            aws-region: ${{ env.AWS_REGION }}
+          script: |
 
-        - name: Fill in the new image ID in the Amazon ECS task definition
-          id: task-def
-          uses: aws-actions/amazon-ecs-render-task-definition@v1.2.0
-          with:
-            task-definition: ${{ env.ECS_TASK_DEFINITION_FILE }}
-            container-name: ${{ env.CONTAINER_NAME }}
-            image: ${{ needs.build.outputs.image }}
+            cd ailearn-landingpage
 
-        - name: Download task definition
-          id: download-task-def
-          run: |
-            aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} --query taskDefinition | jq -r 'del(
-              .taskDefinitionArn,
-              .requiresAttributes,
-              .compatibilities,
-              .revision,
-              .status,
-              .registeredAt,
-              .registeredBy
-            )' > task-definition.json
+            # run aws ecr login to aws ecr and process with iam role
+            aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
 
-        - name: Deploy Amazon ECS task definition
-          uses: aws-actions/amazon-ecs-deploy-task-definition@v1.4.11
-          with:
-            task-definition: ${{ steps.task-def.outputs.task-definition }}
-            service: ${{ env.ECS_SERVICE }}
-            cluster: ${{ env.ECS_CLUSTER }}
-            wait-for-service-stability: true
+            sudo docker compose stop # stop the container
+            sudo docker compose rm -f # -f: This flag means to force the removal of containers. It will stop the containers if they are running and then remove them.
+            sudo docker compose pull # image name must be the same as repository
+            sudo docker compose -f docker-compose.dev.aws.yaml up -d # -d => detached mode
+            sudo docker image prune -af # -af: -a => all, -f => force, remove all images including unused and used images

@@ -1,7 +1,9 @@
 # ref: https://github.com/vercel/next.js/blob/canary/examples/with-docker-compose/next-app/dev.Dockerfile
 
+ARG NODE_VERSION=20.11.1
+
 # Step 1. Rebuild the source code only when needed
-FROM node:20.10.0 as builder
+FROM node:${NODE_VERSION}-alpine AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -27,7 +29,8 @@ COPY . .
 # Uncomment the following line to disable telemetry at run time
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-# Note: Don't expose ports here, Compose will handle that for us
+ARG PORT
+ENV PORT=${PORT}
 
 # Start Next.js in development mode based on the preferred package manager
 CMD \

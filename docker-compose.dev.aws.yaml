@@ -6,28 +6,16 @@ name: ai-learn-landing-page-dev
 services:
     next-app:
         container_name: landing-page
-        image: ai-learn-landing-page-dev
+        image: ${DOCKER_REGISTRY}/${PROJET_NAME}:latest
         build:
             context: .
-            dockerfile: "docker/development/Dockerfile"
-
-        # TODO: Set the environment variables in the .env file
-        # Set environment variables directly in the docker-compose file
-        # environment:
-        # ENV_VARIABLE: ${ENV_VARIABLE}
-        # NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
-
-        # Set environment variables based on the .env file
-        # env_file:
-        # - .env
+            dockerfile: "docker/aws-dev/Dockerfile"
 
         restart: always
         environment:
             - NODE_ENV=development
-
         volumes:
             - ./app:/app/src
             - ./public:/app/public
-
         ports:
             - ${PORT}:${PORT}

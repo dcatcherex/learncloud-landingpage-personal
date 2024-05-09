@@ -10,8 +10,8 @@ services:
         build:
             context: .
             dockerfile: "docker/production/Dockerfile"
+        restart: always
         environment:
             NODE_ENV: production
-        restart: always
         ports:
-            - 3000:3000
+            - ${PORT}:${PORT}
