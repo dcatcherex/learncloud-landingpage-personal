@@ -13,7 +13,6 @@ import { authType } from "@/types/auth-type";
 // components
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 
 import {
   InputOTP,
@@ -26,6 +25,7 @@ import Social from "@/components/auth/social";
 import Footer from "@/components/auth/footer";
 import Header from "./header";
 import Link from "next/link";
+import Seperator from "../seperator";
 
 const testLoginCode = 123456;
 
@@ -130,11 +130,7 @@ const VerifyForm = ({ email, otpRef }: authType) => {
       </Form>
 
       {/* separator */}
-      <div className="flex items-center my-4">
-        <div className="flex-grow h-px bg-gray-400"></div>
-        <p className="mx-2 text-gray-400 text-sm">or continue with</p>
-        <div className="flex-grow h-px bg-gray-400"></div>
-      </div>
+      <Seperator details="or continue with"/>
 
       {/* social login buttons  */}
       <div className="flex justify-center">
