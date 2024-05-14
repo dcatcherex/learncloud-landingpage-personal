@@ -3,7 +3,7 @@ import Header from "@/components/header"
 
 const ExamPage = () => {
   return (
-    <section className="pt-20">
+    <section className="pt-20 ci-gradient1">
       <Header />
       <div className="mx-auto max-w-3xl ">
 

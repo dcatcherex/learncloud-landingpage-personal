@@ -1,4 +1,5 @@
 import * as React from "react"
+import { AlertCircleIcon } from "lucide-react"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
 import {
@@ -152,14 +153,16 @@ const FormMessage = React.forwardRef<
   }
 
   return (
-    <p
-      ref={ref}
-      id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
-      {...props}
-    >
-      {body}
-    </p>
+    <div>
+      <p
+        ref={ref}
+        id={formMessageId}
+        className={cn("text-[10px] bg-red-200 font-normal text-red-400 rounded-lg px-2 py-1", className)}
+        {...props}
+      >
+        {body}
+      </p>
+    </div>
   )
 })
 FormMessage.displayName = "FormMessage"

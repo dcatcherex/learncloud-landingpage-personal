@@ -17,6 +17,15 @@ module.exports = {
       },
     },
     extend: {
+      keyframes: {
+        "caret-blink": {
+          "0%,70%,100%": { opacity: "1" },
+          "20%,50%": { opacity: "0" },
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       boxShadow: {
         'mild': '0 4px 21px 1 rgba(48, 123, 196, 0.1)',
         'outter': '0 0 16px rgba(0, 0, 0, 0.15)',

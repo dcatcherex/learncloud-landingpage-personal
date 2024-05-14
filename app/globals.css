@@ -55,6 +55,9 @@ li:hover .opacity-0 {
   .check-yellow {
     @apply border-2 border-yellow-500;
   }
+  .ci-gradient1 {
+    @apply bg-gradient-to-br from-indigo-300/20 to-purple-400/30;
+  }
 }
 
 @layer base {

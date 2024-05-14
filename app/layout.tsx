@@ -45,7 +45,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TopNav />
+          {/* <TopNav /> */}
           {children}
         </ThemeProvider>
         {/* <TailwindIndicator /> */}
