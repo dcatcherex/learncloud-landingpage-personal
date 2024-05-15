@@ -1,10 +1,20 @@
-type WelcomeTargetProps = {
-    targetScore: number;
-}
+import TargetScoreCarousel from "@/components/auth/target-score-carousel";
+import TargetScoreSelector from "@/components/auth/target-score-selector";
 
-const WelcomeTarget = ({targetScore}: WelcomeTargetProps) => {
+type WelcomeTargetProps = {
+  targetScore: number;
+};
+
+const WelcomeTarget = ({ targetScore }: WelcomeTargetProps) => {
   return (
-    <div>target score = {targetScore}</div>
-  )
-}
-export default WelcomeTarget
+    <div>
+      <div className="text-gray-800 text-base font-medium my-6">
+      What you 🎯 target score ?
+      </div>
+      {/* score selector */}
+      <TargetScoreSelector />
+      <TargetScoreCarousel />
+    </div>
+  );
+};
+export default WelcomeTarget;

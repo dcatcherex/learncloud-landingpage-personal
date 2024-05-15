@@ -5,7 +5,6 @@ import {useState} from "react";
 
 // validation
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { validateOtpSchema } from "@/schemas/auth-schemas";
 import { authType } from "@/types/auth-type";

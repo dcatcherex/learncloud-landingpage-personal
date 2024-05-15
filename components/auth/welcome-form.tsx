@@ -1,69 +1,86 @@
-"use client";
-
-import { useFormStatus } from "react-dom";
-import { useRef, useState } from "react";
-
-// validation
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { validateOtpSchema } from "@/schemas/auth-schemas";
-
-// components
+import { useState } from "react";
 import WelcomeName from "@/components/auth/welcome-name";
 import WelcomeTarget from "@/components/auth/welcome-target";
 import WelcomeAge from "@/components/auth/welcome-age";
 import WelcomeInterests from "@/components/auth/welcome-interests";
+import { Button } from "../ui/button";
+import TargetScoreSelector from "./target-score-selector";
+import TargetScoreCarousel from "./target-score-carousel";
 
 const welcomePageArray = [
   {
-    pageId: 1,
     title: "Let's Start...",
+    component: WelcomeName,
+    props: { name: "" },
   },
   {
-    pageId: 2,
     title: "Two More...",
+    component: WelcomeTarget,
+    props: { targetScore: 0 },
   },
   {
-    pageId: 3,
     title: "One More...",
+    component: WelcomeAge,
+    props: { age: "" },
   },
   {
-    pageId: 4,
     title: "And we are done...",
+    component: WelcomeInterests,
+    props: { interests: [""], hobbies: [""] },
   },
 ];
 
+const defaultProps = {
+  name: "",
+  targetScore: 0,
+  age: 0,
+  interests: [],
+  hobbies: [],
+};
+
+
+
 const WelcomeForm = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(3);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [targetScore, setTargetScore] = useState(0);
   const [interests, setInterests] = useState([""]);
   const [hobbies, setHobbies] = useState([""]);
 
-  const { pending } = useFormStatus();
+  const CurrentComponent = welcomePageArray[currentPage].component;
+  const currentProps = {
+    ...defaultProps,
+    ...welcomePageArray[currentPage].props,
+  };
 
-
-  const form = useForm<z.infer<typeof validateOtpSchema>>({
-    resolver: zodResolver(validateOtpSchema),
-    defaultValues: {
-      otp: "",
-    },
-  });
-
-  const onSubmit = async (values: z.infer<typeof validateOtpSchema>) => {
-    console.log("name value = " + values.otp);
+  const handlePreviousClick = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+    console.log("CurrentPage = " + (currentPage - 1));
+  };
+  
+  const handleNextClick = () => {
+    if (currentPage < welcomePageArray.length - 1) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+    console.log("CurrentPage = " + (currentPage + 1));
   };
 
   return (
-    <div className="max-w-96 h-[800px] rounded-lg p-4 bg-gradient-to-tr from-blue-500/30 via-purple-400/20 to-white">
+    <div className="min-w-[300px] max-w-96 h-[800px] rounded-lg p-4 bg-gradient-to-tr from-blue-500/30 to-purple-400/20 ">
       {/* header */}
-      <h1>{welcomePageArray[currentPage].title}</h1>
+      <h1 className="text-xl font-semibold">{welcomePageArray[currentPage].title}</h1>
+
+      {/* page indicator */}
+      <div className="flex justify-end">
+        <div className="pr-1">{currentPage + 1} </div>
+        <div>of {welcomePageArray.length}</div>
+        </div>
+
 
       {/* bar indicator */}
       <div className="flex gap-2">
-        {welcomePageArray.map((page, index) => (
+        {welcomePageArray.map((_, index) => (
           <div
             key={index}
             className={`  ${
@@ -74,18 +91,31 @@ const WelcomeForm = () => {
           ></div>
         ))}
       </div>
+
       {/* form */}
-            if (currentPage === 0) {
-                <WelcomeName name={name}    />
-                
-            }else if(currentPage === 1){
-                <WelcomeTarget targetScore={targetScore} />
-            }else if(currentPage === 2){
-                <WelcomeAge age={age}/>
-            }else if(currentPage === 3){
-                <WelcomeInterests interests={interests} hobbies={hobbies} />
-            }
+      <CurrentComponent {...currentProps} />
+
+      
+
       {/* navigation  */}
+      <div className="flex justify-between">
+        <div>
+          {currentPage !== 0 && (
+            <Button
+              className="shadow-outter"
+              onClick={handlePreviousClick}
+            >
+              Previous
+            </Button>
+          )}
+        </div>
+        <Button
+          className="shadow-outter"
+          onClick={handleNextClick}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };
