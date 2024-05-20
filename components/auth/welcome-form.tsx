@@ -4,8 +4,7 @@ import WelcomeTarget from "@/components/auth/welcome-target";
 import WelcomeAge from "@/components/auth/welcome-age";
 import WelcomeInterests from "@/components/auth/welcome-interests";
 import { Button } from "../ui/button";
-import TargetScoreSelector from "./target-score-selector";
-import TargetScoreCarousel from "./target-score-carousel";
+import Image from "next/image";
 
 const welcomePageArray = [
   {
@@ -38,8 +37,6 @@ const defaultProps = {
   hobbies: [],
 };
 
-
-
 const WelcomeForm = () => {
   const [currentPage, setCurrentPage] = useState(3);
   const [name, setName] = useState("");
@@ -58,7 +55,7 @@ const WelcomeForm = () => {
     setCurrentPage((prevPage) => prevPage - 1);
     console.log("CurrentPage = " + (currentPage - 1));
   };
-  
+
   const handleNextClick = () => {
     if (currentPage < welcomePageArray.length - 1) {
       setCurrentPage((prevPage) => prevPage + 1);
@@ -69,14 +66,15 @@ const WelcomeForm = () => {
   return (
     <div className="min-w-[300px] max-w-96 h-[800px] rounded-lg p-4 bg-gradient-to-tr from-blue-500/30 to-purple-400/20 ">
       {/* header */}
-      <h1 className="text-xl font-semibold">{welcomePageArray[currentPage].title}</h1>
+      <h1 className="text-xl font-semibold">
+        {welcomePageArray[currentPage].title}
+      </h1>
 
       {/* page indicator */}
       <div className="flex justify-end">
         <div className="pr-1">{currentPage + 1} </div>
         <div>of {welcomePageArray.length}</div>
-        </div>
-
+      </div>
 
       {/* bar indicator */}
       <div className="flex gap-2">
@@ -95,25 +93,31 @@ const WelcomeForm = () => {
       {/* form */}
       <CurrentComponent {...currentProps} />
 
-      
-
       {/* navigation  */}
       <div className="flex justify-between">
         <div>
           {currentPage !== 0 && (
-            <Button
-              className="shadow-outter"
-              onClick={handlePreviousClick}
-            >
-              Previous
+            <Button className="shadow-outter size-12 rounded-2xl p-0" onClick={handlePreviousClick}>
+              <Image
+              className="transform rotate-180"
+                src={"/arrow-right.svg"}
+                width={24}
+                height={24}
+                alt="prev button"
+              />
             </Button>
           )}
         </div>
         <Button
-          className="shadow-outter"
+          className="shadow-outter size-12 rounded-2xl p-0"
           onClick={handleNextClick}
         >
-          Next
+          <Image
+            src={"/arrow-right.svg"}
+            width={24}
+            height={24}
+            alt="next button"
+          />
         </Button>
       </div>
     </div>

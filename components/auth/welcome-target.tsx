@@ -1,5 +1,6 @@
 import TargetScoreCarousel from "@/components/auth/target-score-carousel";
 import TargetScoreSelector from "@/components/auth/target-score-selector";
+import ScoreSelector from "./score-selector";
 
 type WelcomeTargetProps = {
   targetScore: number;
@@ -14,6 +15,7 @@ const WelcomeTarget = ({ targetScore }: WelcomeTargetProps) => {
       {/* score selector */}
       <TargetScoreSelector />
       <TargetScoreCarousel />
+      <ScoreSelector />
     </div>
   );
 };

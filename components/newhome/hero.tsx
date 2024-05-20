@@ -3,9 +3,9 @@ import { Button } from "../ui/button"
 
 const Hero = () => {
   return (
-    <div className="mt-10 lg:mt-52">
+    <div className=" lg:pt-52 bg-[url('/home/bg-gradient-big.jpg')] bg-cover bg-left bg-no-repeat">
           <div className="lg:flex max-w-[1200px] mx-auto">
-            <div className="flex-1 px-4 lg:px-20">
+            <div className="flex-1 px-4 lg:px-20 pt-28 pb-20 ">
               <h2 className="text-gray-800 font-medium lg:font-semibold text-xl lg:text-4xl -mb-2 lg:mb-9">
                 เตรียมสอบ{" "}
                 <span className="text-indigo-400 text-2xl lg:text-5xl font-medium lg:font-semibold ">
@@ -25,7 +25,8 @@ const Hero = () => {
 
               <div className="block lg:hidden -mt-12">
               <Image
-                src={"/home/hero.png"}
+                className="rounded-[20px] "
+                src={"/home/thaistartup2.jpg"}
                 width={588}
                 height={561}
                 alt="hero pic"
@@ -101,14 +102,16 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-            <div className="hidden lg:block flex-1 -mt-20">
+            <div className="hidden lg:block flex-1 ">
               <Image
-                src={"/home/hero.png"}
+              className="rounded-[40px]"
+                src={"/home/thaistartup2.jpg"}
                 width={588}
-                height={561}
+                height={806}
                 alt="hero pic"
               />
             </div>
+            
           </div>
         </div>
   )

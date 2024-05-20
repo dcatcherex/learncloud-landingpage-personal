@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 
 const Price = () => {
   return (
-    <section className="flex flex-col justify-center items-center bg-white lg:pb-20 gap-4 lg:gap-12 mx-4 lg:mx-0 ">
+    <section className="flex flex-col justify-center items-center bg-white lg:py-[112px] gap-4 lg:gap-12 mx-4 lg:mx-0 ">
           <h2 className="text-xl lg:text-[38px] font-medium lg:font-semibold">
             <span className="text-indigo-500">Get started </span>today
           </h2>
@@ -58,7 +58,7 @@ const Price = () => {
                 </div>
               </ul>
             </div>
-            <div className="flex flex-col justify-center shadow-outter rounded-lg px-10 py-6 bg-gradient-to-r from-blue-50 to-white h-[626px] max-w-[462px]">
+            <div className="flex flex-col justify-center shadow-outter rounded-lg px-10 py-6 bg-gradient-to-r from-indigo-500/40 to-purple-400/40 h-[626px] max-w-[462px]">
               <h2 className="text-gray-800 text-3xl font-medium leading-10 mb-4">
                 Professional
               </h2>

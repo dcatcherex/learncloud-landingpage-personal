@@ -84,7 +84,7 @@ const WelcomeInterests = ({ interests, hobbies }: WelcomeInterestsProps) => {
               id={interest}
               className={`text-gray-800 h-12 px-4 py-3 bg-white/50 rounded-2xl text-left text-base border-2 font-normal ${
                 selectedInterests.includes(interest)
-                  ? "border-black"
+                  ? "border-primary"
                   : "border-white"
               }`}
             >
@@ -110,7 +110,7 @@ const WelcomeInterests = ({ interests, hobbies }: WelcomeInterestsProps) => {
               id={hobbies}
               className={`text-gray-800 h-12 px-4 py-3 bg-white/50 rounded-2xl text-left text-base border-2 font-normal ${
                 selectedHobbies.includes(hobbies)
-                  ? "border-black"
+                  ? "border-primary"
                   : "border-white"
               }`}
             >

@@ -1,4 +1,6 @@
 
+import { useState } from "react";
+
 type WelcomeAgeProps = {
   age: string;
 };
@@ -32,6 +34,7 @@ const ageRanges = [
 ]
 
 const WelcomeAge = ({ age }: WelcomeAgeProps) => {
+  const [ageRange, setAgeRange] = useState("")
   return (
     <div>
       <div className="text-gray-800 text-base font-medium my-6">
@@ -41,11 +44,17 @@ const WelcomeAge = ({ age }: WelcomeAgeProps) => {
         {ageRanges.map(({id,label,value}) => (
             <button
               onClick={() => {
-                console.log(value)
+                setAgeRange(value)
+                console.log("ageRange = " + ageRange)
+                console.log("value = " + value)
               }}
               key={id}
               id={label}
-              className="w-full text-gray-800 h-12 px-4 py-3 bg-white/50 rounded-2xl border border-white text-left text-base font-normal"
+              className={`w-full text-gray-800 h-12 px-4 py-3 bg-white/50 rounded-2xl border-2 text-left text-base font-normal ${
+                ageRange === value
+                 ? "border-primary"
+                  : "border-white"
+              }`}
             >{label}</button>
         ))}
          </div>

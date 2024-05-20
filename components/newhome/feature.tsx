@@ -33,13 +33,13 @@ const Feature = ({
           />
         </div>
         <div className="flex-1 pt-8 lg:p-4">
-          <p className="text-blue-800 text-base font-medium">{subTitle}</p>
-          <h2 className="font-semibold text-4xl ">
+          <h2 className="font-semibold text-[32px] text-blue-800 mb-6 ">
             {title}
           </h2>
-          <h3 className="text-xl font-medium text-neutral-500">
+          <h3 className="text-gray-800 text-2xl font-medium mb-6">{subTitle}</h3>
+          <p className="text-base font-normal text-neutral-500">
             {description}
-          </h3>
+          </p>
         </div>
       </div>
     </section>
