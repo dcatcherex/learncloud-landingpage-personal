@@ -23,8 +23,8 @@ permissions:
 jobs:
   ssh-to-server-and-update-docker-container:
     name: SSH to Server and Update Docker Container
-    # runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    # runs-on: self-hosted
     environment: ${{ inputs.ENV }}
     steps:
       - name: SSH to Server and update docker container
