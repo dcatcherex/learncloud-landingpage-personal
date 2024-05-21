@@ -53,9 +53,9 @@ permissions:
 
 jobs:
   build:
-    runs-on: self-hosted
     name: Build Next.js and Push to AWS ECR
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment: ${{ inputs.ENV }}
     outputs:
       imageid: ${{ steps.print-imageid.outputs.imageid }}
