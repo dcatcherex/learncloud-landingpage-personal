@@ -1,4 +1,4 @@
-name: AWS-CD-BACKEND-SERVER (EC2)
+name: AWS-CD-SERVER (EC2)
 
 on:
   workflow_call:

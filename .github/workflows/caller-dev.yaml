@@ -60,10 +60,3 @@ jobs:
       DOCKER_FILE: "docker-compose.dev.yaml"
 
     secrets: inherit
-
-  migrate-db:
-    uses: ./.github/workflows/migrate-db-reusable.yaml
-    with:
-      ENV: "Development"
-
-    secrets: inherit

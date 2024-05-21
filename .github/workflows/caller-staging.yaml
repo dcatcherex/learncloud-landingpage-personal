@@ -61,10 +61,3 @@ jobs:
       DOCKER_FILE: "docker-compose.staging.yaml"
 
     secrets: inherit
-
-  migrate-db:
-    uses: ./.github/workflows/migrate-db-reusable.yaml
-    with:
-      ENV: "Staging"
-
-    secrets: inherit
