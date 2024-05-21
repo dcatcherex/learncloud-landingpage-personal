@@ -53,6 +53,7 @@ permissions:
 
 jobs:
   build:
+    runs-on: self-hosted
     name: Build Next.js and Push to AWS ECR
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENV }}
