@@ -6,7 +6,8 @@
 
 **/.classpath
 **/.dockerignore
-**/.env
+**/.env*
+**/.github
 **/.git
 **/.gitignore
 **/.project
@@ -32,6 +33,12 @@
 **/dist
 LICENSE
 README.md
+
+# ignore .aws file
+**/.aws/*
+
+# ignore next build files
+.next/*
 
 .vscode/*
 !.vscode/settings.json

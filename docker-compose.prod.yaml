@@ -1,17 +1,21 @@
 # ref: https://github.com/vercel/next.js/blob/canary/examples/with-docker-compose/docker-compose.prod.yml
 
-version: "3.8"
-
 name: ai-learn-landing-page-prod
 services:
-    next-app:
-        container_name: landing-page
-        image: ai-learn-landing-page-prod
-        build:
-            context: .
-            dockerfile: "docker/production/Dockerfile"
-        restart: always
-        environment:
-            NODE_ENV: production
-        ports:
-            - ${PORT}:${PORT}
+  landing-page-app:
+    container_name: landing-page
+    image: ${DOCKER_REGISTRY}/${PROJET_NAME}:latest
+    build:
+      context: .
+      dockerfile: "docker/multi-stage/Dockerfile"
+      target: production
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+
+    networks:
+      - learn_cloud_network
+
+networks:
+  learn_cloud_network:
+    driver: bridge

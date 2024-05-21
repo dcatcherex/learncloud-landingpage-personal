@@ -1,0 +1,70 @@
+name: Call AWS-CI/CD with Staging Environment
+
+on:
+  push:
+    branches:
+      - staging
+
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+      - "**/*.md"
+      - "docs/**"
+      - ".gitignore"
+      - ".gitattributes"
+      - ".editorconfig"
+      - ".eslintrc.js"
+      - ".prettierrc.js"
+      - ".vscode/**"
+      # - 'aws/**'
+      # - 'terraform/**'
+      # - 'helm/**'
+      # - 'k8s/**'
+      # - 'ansible/**'
+
+  pull_request:
+    branches:
+      - staging
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/ci-reusable.yaml
+    with:
+      ENV: "Staging"
+      AWS_ROLE_ARN: "arn:aws:iam::471112879285:role/github-actions-backend-learn-cloud"
+      AWS_ROLE_SESSION_NAME: "github-action-backend-learn-cloud-deployment"
+      ECR_REPOSITORY: "ai-learn-nextjs-landing-page"
+      ECS_SERVICE: "ai-learn-frontend"
+      DOCKER_FILE_FOLDER: "multi-stage"
+      CONTAINER_NAME: "ai-learn-nextjs-landing-page"
+      IMAGE_TAG: "latest"
+
+    secrets: inherit
+
+  ssh-to-backend-server-and-update-docker-container:
+    uses: ./.github/workflows/cd-reusable.yaml
+    needs: build
+    with:
+      ENV: "Staging"
+      DOCKER_FILE: "docker-compose.staging.yaml"
+
+    secrets: inherit
+
+  migrate-db:
+    uses: ./.github/workflows/migrate-db-reusable.yaml
+    with:
+      ENV: "Staging"
+
+    secrets: inherit

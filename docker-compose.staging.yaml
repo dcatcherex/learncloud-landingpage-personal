@@ -1,6 +1,6 @@
 # ref: https://github.com/vercel/next.js/blob/canary/examples/with-docker-compose/docker-compose.dev.yml
 
-name: ai-learn-landing-page-dev
+name: ai-learn-landing-page-staging
 services:
   landing-page-app:
     container_name: landing-page
@@ -8,19 +8,10 @@ services:
     build:
       context: .
       dockerfile: "docker/multi-stage/Dockerfile"
-      target: development
+      target: production
     restart: always
-
     volumes:
       - ./app:/usr/src/app/src
       - ./public:/usr/src/app/public
-
     ports:
       - ${PORT}:${PORT}
-
-    networks:
-      - learn_cloud_network
-
-networks:
-  learn_cloud_network:
-    driver: bridge
