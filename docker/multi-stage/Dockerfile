@@ -49,6 +49,8 @@ COPY . .
 
 FROM node:${NODE_VERSION}-alpine AS build
 
+ENV NODE_ENV production
+
 WORKDIR /usr/src/app
 
 COPY --chown=node:node package.json yarn.lock* package-lock.json* pnpm-lock.yaml* tsconfig.json ./
