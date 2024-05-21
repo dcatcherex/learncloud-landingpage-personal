@@ -36,7 +36,6 @@ services:
       - -c
       - |
         pnpm dev
-        sleep infinity
 
     networks:
       - learn_cloud_network

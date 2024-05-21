@@ -83,6 +83,8 @@ jobs:
       #   id: setup-qemu
       #   uses: docker/setup-qemu-action@v3
 
+      # Ref : https://github.com/docker/setup-qemu-action/issues/67
+      # Note : this is a workaround for the issue above when runing on self-host runner
       - name: Install QEMU
         run: |
           sudo apt-get update

@@ -18,6 +18,12 @@ services:
     ports:
       - ${PORT}:${PORT}
 
+    command:
+      - /bin/sh
+      - -c
+      - |
+        pnpm dev
+
     networks:
       - learn_cloud_network
 
