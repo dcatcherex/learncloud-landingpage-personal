@@ -39,6 +39,7 @@ permissions:
 
 jobs:
   build:
+    runs-on: self-hosted
     uses: ./.github/workflows/ci-reusable.yaml
     with:
       ENV: "Development"
