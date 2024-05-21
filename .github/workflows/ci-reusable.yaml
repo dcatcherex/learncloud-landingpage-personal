@@ -31,6 +31,10 @@ on:
         required: true
         type: string
 
+      DOCKER_FILE_TARGET_STAGE:
+        required: true
+        type: string
+
       CONTAINER_NAME:
         required: true
         type: string
@@ -94,6 +98,7 @@ jobs:
           file: ./docker/${{ inputs.DOCKER_FILE_FOLDER }}/Dockerfile
           build-args: |
             PORT=${{ secrets.PORT }}
+          target: ${{ inputs.DOCKER_FILE_TARGET_STAGE }}
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ inputs.ECR_REPOSITORY }}:${{ github.sha }}

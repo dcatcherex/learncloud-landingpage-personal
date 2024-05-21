@@ -47,6 +47,7 @@ jobs:
       ECR_REPOSITORY: "ai-learn-nextjs-landing-page"
       ECS_SERVICE: "ai-learn-frontend"
       DOCKER_FILE_FOLDER: "multi-stage"
+      DOCKER_FILE_TARGET_STAGE: "Development"
       CONTAINER_NAME: "ai-learn-nextjs-landing-page"
       IMAGE_TAG: "latest"
 
