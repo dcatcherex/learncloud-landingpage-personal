@@ -1,0 +1,119 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: AWS-CI-BUILD-DOCKER (EC2)
+
+on:
+  workflow_call:
+    inputs:
+      ENV:
+        description: "Environment"
+        required: true
+        type: string
+
+      AWS_ROLE_ARN:
+        required: true
+        type: string
+
+      AWS_ROLE_SESSION_NAME:
+        required: true
+        type: string
+
+      ECR_REPOSITORY:
+        required: true
+        type: string
+
+      ECS_SERVICE:
+        required: true
+        type: string
+
+      DOCKER_FILE_FOLDER:
+        required: true
+        type: string
+
+      DOCKER_FILE_TARGET_STAGE:
+        required: true
+        type: string
+
+      CONTAINER_NAME:
+        required: true
+        type: string
+
+      IMAGE_TAG:
+        required: true
+        type: string
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    name: Build Next.js and Push to AWS ECR
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
+    environment: ${{ inputs.ENV }}
+    outputs:
+      imageid: ${{ steps.print-imageid.outputs.imageid }}
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        id: configure-aws-credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ inputs.AWS_ROLE_ARN }}
+          role-session-name: ${{ inputs.AWS_ROLE_SESSION_NAME }} # Defaults to "GitHubActions", but may be changed if required.
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # - name: Set up QEMU
+      #   id: setup-qemu
+      #   uses: docker/setup-qemu-action@v3
+
+      # Ref : https://github.com/docker/setup-qemu-action/issues/67
+      # Note : this is a workaround for the issue above when runing on self-host runner
+      - name: Install QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Set up Docker Buildx
+        id: setup-docker-buildx
+        uses: docker/setup-buildx-action@v3
+
+      # TODO: investigate docker image index tags and can't send variable to task definition step
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64, linux/arm64
+          file: ./docker/${{ inputs.DOCKER_FILE_FOLDER }}/Dockerfile
+          build-args: |
+            PORT=${{ secrets.PORT }}
+          target: ${{ inputs.DOCKER_FILE_TARGET_STAGE }}
+          push: true
+          tags: |
+            ${{ steps.login-ecr.outputs.registry }}/${{ inputs.ECR_REPOSITORY }}:${{ github.sha }}
+            ${{ steps.login-ecr.outputs.registry }}/${{ inputs.ECR_REPOSITORY }}:${{ inputs.IMAGE_TAG }}
+          labels: ${{ inputs.IMAGE_TAG }}
+
+      # - name: Print docker imageid to store the env variable
+      #   id: print-imageid
+      #   run: |
+      #     echo "imageid=${{ steps.build-image.outputs.imageid }}" >> $GITHUB_OUTPUT

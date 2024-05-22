@@ -2,8 +2,9 @@
 
 ARG NODE_VERSION=20.11.1
 
-# Step 1. Rebuild the source code only when needed
 FROM node:${NODE_VERSION}-alpine AS build
+
+ENV NODE_ENV production
 
 # Set the working directory in the container
 WORKDIR /app
@@ -35,6 +36,8 @@ RUN \
     elif [ -f pnpm-lock.yaml ]; then pnpm build; \
     else npm run build; \
     fi
+
+USER node
 
 # Note: It is not necessary to add an intermediate step that does a full copy of `node_modules` here
 
@@ -68,5 +71,7 @@ RUN apk add dumb-init
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
-CMD ["dump-init", "node", "server.js"]
+USER node
+
+CMD ["dumb-init", "node", "server.js"]
 # CMD ["tail", "-f", "/dev/null"]

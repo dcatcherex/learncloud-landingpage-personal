@@ -1,0 +1,53 @@
+name: AWS-CD-SERVER (EC2)
+
+on:
+  workflow_call:
+    inputs:
+      ENV:
+        description: "Environment"
+        required: true
+        type: string
+
+      DOCKER_FILE:
+        required: true
+        type: string
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  ssh-to-server-and-update-docker-container:
+    name: SSH to Server and Update Docker Container
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
+    environment: ${{ inputs.ENV }}
+    steps:
+      - name: SSH to Server and update docker container
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # private key for ssh
+          passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSPHRASE }}
+
+          script: |
+
+            cd app
+
+            sudo docker compose -f ${{ inputs.DOCKER_FILE }} stop # stop the container
+            sudo docker compose -f ${{ inputs.DOCKER_FILE }} rm -f # -f: This flag means to force the removal of containers. It will stop the containers if they are running and then remove them.
+
+            # run aws ecr login to aws ecr
+            aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | sudo docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+            # NOTE: use docker compose pull image instead
+            sudo docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
+            # sudo docker compose -f docker-compose.dev.yaml pull # image name must be the same as repository
+
+            sudo docker compose -f ${{ inputs.DOCKER_FILE }} up -d # -d => detached mode
+            sudo docker image prune -af # -af: -a => all, -f => force, remove all images including unused and used images
