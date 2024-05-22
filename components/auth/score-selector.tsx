@@ -5,9 +5,9 @@ const ScoreSelector = () => {
   const maxScore = 990;
   const step = 10;
   const [selectedScore, setSelectedScore] = useState(750);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleWheel = (event) => {
+  const handleWheel = (event: WheelEvent) => {
     event.preventDefault();
     if (event.deltaY < 0) {
       setSelectedScore((prev) => Math.max(prev - step, minScore));
@@ -18,11 +18,13 @@ const ScoreSelector = () => {
 
   useEffect(() => {
     const container = containerRef.current;
-    container.addEventListener('wheel', handleWheel);
-    return () => {
-      container.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
+    if (container) {
+      container.addEventListener('wheel', handleWheel as EventListener);
+      return () => {
+        container.removeEventListener('wheel', handleWheel as EventListener);
+      };
+    }
+  }, [handleWheel]);
 
   const scores = [];
   for (let i = minScore; i <= maxScore; i += step) {
