@@ -32,7 +32,7 @@ const welcomePageArray = [
 const defaultProps = {
   name: "",
   targetScore: 0,
-  age: 0,
+  age: "",
   interests: [],
   hobbies: [],
 };
