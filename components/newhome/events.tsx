@@ -29,11 +29,11 @@ const events = [
 
 const Events = () => {
   return (
-    <section className="py-8 bg-[url('/home/bg-gradient-big.jpg')] bg-cover bg-left bg-no-repeat" >
+    <section className="py-8 bg-[url('/home/bg-gradient-big.jpg')] bg-cover bg-left bg-no-repeat px-4 lg:px-0" >
       
       <div className="max-w-[1200px] lg:mx-auto gap-12 overflow-hidden">
-        <h2 className="text-[32px] mb-8" >Events</h2>
-        <div className="flex gap-12 ">
+        <h2 className="text-[32px] mb-2 lg:mb-8 font-semibold " >Events</h2>
+        <div className="flex flex-col lg:flex-row gap-2 lg:gap-12 ">
           {events.map((event, index) => (
             <InfoCard key={index} title={event.title} image={event.image} />
           ))}

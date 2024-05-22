@@ -1,5 +1,6 @@
 import comments from "@/offline-data/comments.json";
 import Comment from "@/components/newhome/comment";
+import { Button } from "../ui/button";
 
 type TestimonialProps = {
   comments: {
@@ -12,12 +13,20 @@ type TestimonialProps = {
 };
 
 const Testimonial = () => {
-  return( 
-  <section className="flex gap-12 p-12 bg-white overflow-scroll">
-    {comments.map((comment) => (
-      <Comment key={comment.id} {...comment} />
-    ))}
-  </section>
-  )
+  return (
+    <section className="bg-white px-4">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="flex flex-col lg:flex-row gap-2 lg:gap-12 py-6 lg:py-12 overflow-hidden">
+          {comments.map((comment) => (
+            <Comment key={comment.id} {...comment} />
+          ))}
+        </div>
+        <div>
+          <Button>Prev</Button>
+          <Button>Next</Button>
+        </div>
+      </div>
+    </section>
+  );
 };
 export default Testimonial;

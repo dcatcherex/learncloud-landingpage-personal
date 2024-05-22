@@ -26,12 +26,6 @@
         "avatar": "/avatar/avatar4.jpg",
         "score": "500 > 900",
         "comment": "The explanations for each question are very clear. It's helped me understand where I went wrong."
-    },
-    {
-        "id": 5,
-        "name": "Chris Evans",
-        "avatar": "/avatar/avatar1.jpg",
-        "score": "600 > 850",
-        "comment": "The TOEIC app is very user-friendly and the content is well-organized. It's been a great help in my TOEIC preparation."
     }
+    
 ]

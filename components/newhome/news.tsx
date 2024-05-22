@@ -85,13 +85,17 @@ const edNews = [
 const News = () => {
   const [showToeicNews, setShowToeicNews] = useState(true);
   return (
-    <section className="h-[1236px] bg-white">
+    <section className="lg:pb-10 bg-white lg:-mt-20 p-4 py-8 lg:py-0 lg:p-0">
       <div className="max-w-[1200px] lg:mx-auto">
-        <h2 className="text-[32px] mb-8">News</h2>
-        <div className="flex gap-12 text-gray-400 text-2xl font-medium mb-4">
+        <h2 className="text-[32px] mb-2 lg:mb-8 text-gray-800 font-semibold">
+          News
+        </h2>
+        <div className="flex gap-10 text-gray-400 text-xl lg:text-2xl font-medium mb-4">
           <div
             onClick={() => setShowToeicNews(false)}
-            className={`${!showToeicNews && "text-indigo-500"} hover:cursor-pointer`}
+            className={`${
+              !showToeicNews && "text-indigo-500"
+            } hover:cursor-pointer`}
           >
             General
           </div>
@@ -103,13 +107,13 @@ const News = () => {
           </div>
         </div>
         {showToeicNews && (
-          <div className="flex gap-12">
+          <div className="flex  lg:gap-12">
             <article className=" ">
               {news
                 .filter(({ feature }) => feature === true)
                 .map(({ title, image }, index) => (
-                  <div key={index}>
-                    <div className="w-[768px] h-[1036px] relative ">
+                  <div className="hidden lg:block" key={index}>
+                    <div className=" lg:w-[768px] lg:h-[1036px] relative ">
                       <Image
                         className="rounded-[40px]"
                         src={image}
@@ -124,7 +128,7 @@ const News = () => {
                   </div>
                 ))}
             </article>
-            <div className="flex flex-col gap-6 ">
+            <div className="flex flex-col justify-between gap-2 lg:gap-6">
               {news
                 .filter(({ feature }) => feature !== true)
                 .map(({ title, image }, index) => (

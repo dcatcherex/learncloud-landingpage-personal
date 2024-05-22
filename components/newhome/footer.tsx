@@ -8,7 +8,7 @@ const Footer = () => {
           <div>
             <Image
               className="mb-6"
-              src={"/logo/ailearnnewlogo.svg"}
+              src={"/logo/3d-logo-ailearn.png"}
               width={74}
               height={74}
               alt="new logo"
@@ -26,12 +26,7 @@ const Footer = () => {
                 height={40}
                 alt="facebook"
               />
-              <Image
-                src={"/home/social/linkedin.svg"}
-                width={40}
-                height={40}
-                alt="facebook"
-              />
+              
               <Image
                 src={"/home/social/tiktok.svg"}
                 width={40}
