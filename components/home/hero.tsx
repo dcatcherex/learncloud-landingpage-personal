@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 
-import SocialButton from "@/components/newhome/social-button";
+import SocialButton from "@/components/home/social-button";
 
 // can change contents here
 const HeroImage = () => (

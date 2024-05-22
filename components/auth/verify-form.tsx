@@ -25,6 +25,7 @@ import Footer from "@/components/auth/footer";
 import Header from "./header";
 import Link from "next/link";
 import Seperator from "../seperator";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const testLoginCode = 123456;
 

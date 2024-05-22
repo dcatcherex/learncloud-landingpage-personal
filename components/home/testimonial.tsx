@@ -1,5 +1,5 @@
 import comments from "@/offline-data/comments.json";
-import Comment from "@/components/newhome/comment";
+import Comment from "@/components/home/comment";
 import { Button } from "../ui/button";
 
 type TestimonialProps = {

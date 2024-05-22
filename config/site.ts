@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "Learn Space",
-  description: "Learn Space is a free online space for learning English.",
+  name: "Learn Cloud",
+  description: "Learn Cloud is a free online space for learning English.",
   url: "",
   logo: "/logo.svg",
   mainNav: [

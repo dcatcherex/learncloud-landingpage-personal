@@ -1,5 +1,5 @@
-import Feature from "@/components/newhome/feature"
-import Feature2 from "@/components/newhome/feature2"
+import Feature from "@/components/home/feature"
+import Feature2 from "@/components/home/feature2"
 
 
 const Features = () => {
