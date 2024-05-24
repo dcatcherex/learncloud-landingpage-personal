@@ -13,9 +13,9 @@ const WelcomeTarget = ({ targetScore }: WelcomeTargetProps) => {
       What you 🎯 target score ?
       </div>
       {/* score selector */}
-      <TargetScoreSelector />
+      {/* <TargetScoreSelector /> */}
       <TargetScoreCarousel />
-      <ScoreSelector />
+      {/* <ScoreSelector /> */}
     </div>
   );
 };

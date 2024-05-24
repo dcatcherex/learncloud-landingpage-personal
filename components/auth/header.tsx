@@ -12,7 +12,7 @@ const Header = (
 ) => {
   return (
     <section>
-      <h2 className="text-gray-800 text-2xl font-medium mb-2">
+      <h2 className="text-gray-800 text-base font-medium mb-2">
         {title}
       </h2>
       <p className="text-gray-500 text-sm font-normal mb-4">

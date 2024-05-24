@@ -54,92 +54,88 @@ const VerifyForm = ({ email, otpRef }: authType) => {
   
 
   return (
-    <div className="max-w-96 h-[800px] rounded-lg p-4 bg-gradient-to-tr from-blue-500/30 via-purple-400/20 to-white">
-      {/* header */}
-      <Header
-        title="Verify your email"
-        description="Please enter OTP code sent to wannarat.kri@learncloud.cloud within 300s"
-      />
-
-      {/* form */}
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="otp"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <div className="flex flex-col justify-items-start">
-                    <div className="text-gray-400 text-[10px] font-normal">
-                      Ref: {otpRef?.current}
-                    </div>
-                    <InputOTP maxLength={6} {...field}>
-                      <InputOTPGroup className="mx-auto">
-                        <InputOTPSlot index={0} />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
-                      </InputOTPGroup>
-                    </InputOTP>
-
-                    {form.formState.errors.otp && (
-                      <div className="text-center text-red-400 text-xs font-normal mt-4">
-                        <p>Wrong code, please try again</p>
-                        <p>You can enter the wrong OTP code 4 more times</p>
+    <section className="flex min-h-screen flex-1 flex-col justify-center  sm:px-6 lg:px-8 bg-white   ">
+      <div className=" mx-auto w-full lg:max-w-[400px] p-4 lg:rounded-lg bg-gradient-to-tr from-blue-500/30 via-purple-400/20 to-white  ">
+        {/* header */}
+        <Header
+          title="Verify your email"
+          description="Please enter OTP code sent to wannarat.kri@learncloud.cloud within 300s"
+        />
+        {/* form */}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="otp"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="flex flex-col justify-items-start">
+                      <div className="text-gray-400 text-[10px] font-normal">
+                        Ref: {otpRef?.current}
                       </div>
-                    )}
-                    {}
-                    {loginAttempts > 4  && (
-                      <div className="text-center text-red-400 text-xs font-normal mt-4">
-                        <p>
-                          You entered the wrong OTP more than the allotted time.
-                        </p>
-                        <p>Please request a new OTP again</p>
+                      <InputOTP maxLength={6} {...field}>
+                        <InputOTPGroup className="mx-auto">
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                          <InputOTPSlot index={3} />
+                          <InputOTPSlot index={4} />
+                          <InputOTPSlot index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
+                      {form.formState.errors.otp && (
+                        <div className="text-center text-red-400 text-xs font-normal mt-4">
+                          <p>Wrong code, please try again</p>
+                          <p>You can enter the wrong OTP code 4 more times</p>
+                        </div>
+                      )}
+                      {}
+                      {loginAttempts > 4  && (
+                        <div className="text-center text-red-400 text-xs font-normal mt-4">
+                          <p>
+                            You entered the wrong OTP more than the allotted time.
+                          </p>
+                          <p>Please request a new OTP again</p>
+                        </div>
+                      )}
+                      <div className="mt-4 text-center text-gray-500 text-xs font-normal">
+                        Don&apos;t get a code ?
+                        <Link
+                          className="text-primary underline-offset-1"
+                          href={""}
+                        >
+                          {" "}
+                          Send again
+                        </Link>
                       </div>
-                    )}
-                    <div className="mt-4 text-center text-gray-500 text-xs font-normal">
-                      Don&apos;t get a code ?
-                      <Link
-                        className="text-primary underline-offset-1"
-                        href={""}
-                      >
-                        {" "}
-                        Send again
-                      </Link>
                     </div>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <div className="h-80"></div>
-          <Button
-            type="submit"
-            className="w-full rounded-2xl h-12 px-4 py-3 shadow text-base font-medium"
-            disabled={pending}
-
-            // in case, disable button until the input is valid
-            // disabled={!form.formState.isValid}
-          >
-            Continue
-          </Button>
-        </form>
-      </Form>
-
-      {/* separator */}
-      <Seperator details="or continue with"/>
-
-      {/* social login buttons  */}
-      <div className="flex justify-center">
-        <Social />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <div className="h-12"></div>
+            <Button
+              type="submit"
+              className="w-full rounded-2xl h-12 px-4 py-3 shadow text-base font-medium"
+              disabled={pending}
+              // in case, disable button until the input is valid
+              // disabled={!form.formState.isValid}
+            >
+              Continue
+            </Button>
+          </form>
+        </Form>
+        {/* separator */}
+        <Seperator details="or continue with"/>
+        {/* social login buttons  */}
+        <div className="flex justify-center">
+          <Social />
+        </div>
+        {/* footer  */}
+        <Footer />
       </div>
-
-      {/* footer  */}
-      <Footer />
-    </div>
+    </section>
   );
 };
 export default VerifyForm;

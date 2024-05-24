@@ -64,63 +64,61 @@ const WelcomeForm = () => {
   };
 
   return (
-    <div className="min-w-[300px] max-w-96 h-[800px] rounded-lg p-4 bg-gradient-to-tr from-blue-500/30 to-purple-400/20 ">
-      {/* header */}
-      <h1 className="text-xl font-semibold">
-        {welcomePageArray[currentPage].title}
-      </h1>
-
-      {/* page indicator */}
-      <div className="flex justify-end">
-        <div className="pr-1">{currentPage + 1} </div>
-        <div>of {welcomePageArray.length}</div>
-      </div>
-
-      {/* bar indicator */}
-      <div className="flex gap-2">
-        {welcomePageArray.map((_, index) => (
-          <div
-            key={index}
-            className={`  ${
-              currentPage >= index
-                ? "w-1/4 h-1 bg-primary rounded-full"
-                : "w-1/4 h-1 bg-black opacity-25 rounded-full"
-            }`}
-          ></div>
-        ))}
-      </div>
-
-      {/* form */}
-      <CurrentComponent {...currentProps} />
-
-      {/* navigation  */}
-      <div className="flex justify-between">
-        <div>
-          {currentPage !== 0 && (
-            <Button className="shadow-outter size-12 rounded-2xl p-0" onClick={handlePreviousClick}>
-              <Image
-              className="transform rotate-180"
-                src={"/arrow-right.svg"}
-                width={24}
-                height={24}
-                alt="prev button"
-              />
-            </Button>
-          )}
+    <section className="flex min-h-screen flex-1 flex-col justify-center  sm:px-6 lg:px-8 bg-white   ">
+      <div className="mx-auto w-full lg:max-w-[400px] p-4 lg:rounded-lg bg-gradient-to-tr from-blue-500/30 to-purple-400/20 ">
+        {/* header */}
+        <h1 className="text-xl font-semibold">
+          {welcomePageArray[currentPage].title}
+        </h1>
+        {/* page indicator */}
+        <div className="flex justify-end">
+          <div className="pr-1">{currentPage + 1} </div>
+          <div>of {welcomePageArray.length}</div>
         </div>
-        <Button
-          className="shadow-outter size-12 rounded-2xl p-0"
-          onClick={handleNextClick}
-        >
-          <Image
-            src={"/arrow-right.svg"}
-            width={24}
-            height={24}
-            alt="next button"
-          />
-        </Button>
+        {/* bar indicator */}
+        <div className="flex gap-2">
+          {welcomePageArray.map((_, index) => (
+            <div
+              key={index}
+              className={`  ${
+                currentPage >= index
+                  ? "w-1/4 h-1 bg-primary rounded-full"
+                  : "w-1/4 h-1 bg-black opacity-25 rounded-full"
+              }`}
+            ></div>
+          ))}
+        </div>
+        {/* form */}
+        <CurrentComponent {...currentProps} />
+        {/* navigation  */}
+        <div className="flex justify-between">
+          <div>
+            {currentPage !== 0 && (
+              <Button className="shadow-outter size-12 rounded-2xl p-0" onClick={handlePreviousClick}>
+                <Image
+                className="transform rotate-180"
+                  src={"/arrow-right.svg"}
+                  width={24}
+                  height={24}
+                  alt="prev button"
+                />
+              </Button>
+            )}
+          </div>
+          <Button
+            className="shadow-outter size-12 rounded-2xl p-0"
+            onClick={handleNextClick}
+          >
+            <Image
+              src={"/arrow-right.svg"}
+              width={24}
+              height={24}
+              alt="next button"
+            />
+          </Button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 export default WelcomeForm;

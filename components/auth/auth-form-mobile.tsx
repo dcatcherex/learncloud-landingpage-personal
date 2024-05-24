@@ -8,7 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { validateEmailSchema } from "@/schemas/auth-schemas";
 import { authType } from "@/types/auth-type";
-import { AlertCircleIcon } from "lucide-react";
+import { AlertCircleIcon, CircleXIcon } from "lucide-react";
+import { CircleAlertIcon } from "lucide-react";
 
 // components
 import { Button } from "@/components/ui/button";
@@ -41,9 +42,9 @@ const AuthForm = ({ email, otpRef }: authType) => {
   };
 
   return (
-    <section className="flex min-h-screen flex-1 flex-col justify-center  sm:px-6 lg:px-8 bg-white   ">
+    <section className="flex min-h-full flex-1 flex-col justify-center  sm:px-6 lg:px-8   ">
       {/* header */}
-      <div className=" mx-auto w-full lg:max-w-[400px] p-4 lg:rounded-lg bg-gradient-to-tr from-blue-500/30 via-purple-400/20 to-white  ">
+      <div className="sm:mx-auto min-h-screen sm:w-full sm:max-w-md bg-gradient-to-tr from-blue-500/30 via-purple-400/20 to-white p-4 lg:rounded-lg">
         <Header
           title="What's your email?"
           description="We need it to look up your account or create a new one."
@@ -88,7 +89,7 @@ const AuthForm = ({ email, otpRef }: authType) => {
                 </FormItem>
               )}
             />
-            <div className="h-12"></div>
+            <div className="h-80"></div>
             <Button
               type="submit"
               className="w-full rounded-2xl h-12 px-4 py-3 shadow text-base font-medium"

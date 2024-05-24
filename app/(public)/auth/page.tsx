@@ -12,11 +12,11 @@ const Auth = () => {
   let otpRef = useRef<string>("");
 
   return (
-    <div className="flex justify-center pt-20 ">
-      {/* <AuthForm email={email} otpRef={otpRef} /> */}
+    <div className="flex justify-center ">
+      <AuthForm email={email} otpRef={otpRef} />
       {/* <VerifyForm email={email} otpRef={otpRef} /> */}
       {/* <WelcomeForm /> */}
-      <WelcomeScreen />
+      {/* <WelcomeScreen /> */}
     </div>
   );
 };
